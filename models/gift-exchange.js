@@ -1,4 +1,4 @@
-const { BadRequestError } = require("../utils/erros")
+const { BadRequestError } = require("../utils/errors")
 
 class GiftExchange {
 
@@ -12,7 +12,7 @@ class GiftExchange {
 
         if (names.length % 2 === 1) {
 
-            return next( new Error)
+            return next( new BadRequestError())
 
         }
 
