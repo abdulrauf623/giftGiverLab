@@ -1,25 +1,63 @@
-const express = require("express")
+const express = require("express");
+const { BadRequestError } = require("../utils/erros");
 
-const giftExchange = express.Router()
+const giftExchange = express.Router();
 
 
+
+
+const GiftExchange = require("/Users/abdul.karim/giftGiverLab/models/gift-exchange")
+
+// {
+//   names: [h, h, hh, h];
+// }
 
 giftExchange.post("/traditional", async (req, res, next) => {
-
-res.status(200).json({names : ["Abdul", "Rauf", "Abdul", "Karim"]})
-
+  var body = req.body
 
 
-})
+  if (!body.names || body.names < 2 || (body.names % 2 == 1)){
 
 
-giftExchange.post("/pairs", async(req, res, next) => {
+   return next( new BadRequestError)
 
 
-res.status(200).json({names : ["Abdul", "Rauf", "Abdull", "Karim", "Standard"]})
+  }
 
-})
+  var names = body.names
+
+
+  var value = GiftExchange.traditional(names)
 
 
 
-module.exports = giftExchange
+  res.status(200).json(value);
+
+  //   res.send(req.query);
+});
+
+giftExchange.post("/pairs", async (req, res, next) => {
+
+
+
+    var body = req.body
+
+
+  if (!body.names || (body.names.length % 2 == 1)) {
+
+
+   return next( new BadRequestError)
+
+
+  }
+
+  var names = body.names
+
+
+  var value = GiftExchange.pairs(names)
+
+
+  res.status(200).json(value);
+});
+
+module.exports = giftExchange;

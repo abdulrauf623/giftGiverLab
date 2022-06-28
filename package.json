@@ -1,6 +1,4 @@
 {
-
-  
   "name": "gift-giver-lab",
   "version": "1.0.0",
   "description": "A Node/Express test-driven lab centered around building a gift-giver API",
